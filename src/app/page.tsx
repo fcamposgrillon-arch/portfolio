@@ -8,6 +8,7 @@ import {
   StaggerItem,
   HoverCard,
   Typewriter,
+  MagneticButton,
 } from "@/components/Animations";
 
 /* ─── Data ─── */
@@ -19,6 +20,13 @@ const NAV_LINKS = [
   { label: "Música", href: "#music" },
   { label: "Skills", href: "#skills" },
   { label: "Contacto", href: "#contact" },
+];
+
+const TYPEWRITER_TEXTS = [
+  "Abogado en formación",
+  "Administrador Agrario",
+  "Músico — FRXN",
+  "Escritor",
 ];
 
 const JOURNEY = [
@@ -82,27 +90,53 @@ const PROJECTS = [
 const SKILLS = [
   {
     category: "Legal",
-    items: ["Derecho Civil", "Derecho Agrario", "Derecho Empresarial", "Contratos"],
+    icon: "⚖️",
+    items: [
+      { name: "Derecho Civil", level: 85 },
+      { name: "Derecho Agrario", level: 90 },
+      { name: "Derecho Empresarial", level: 75 },
+      { name: "Contratos", level: 80 },
+    ],
   },
   {
     category: "Agronomía",
-    items: ["Gestión Agrícola", "Administración Rural", "Cadena de Valor", "AgroTech"],
+    icon: "🌱",
+    items: [
+      { name: "Gestión Agrícola", level: 80 },
+      { name: "Administración Rural", level: 85 },
+      { name: "Cadena de Valor", level: 70 },
+      { name: "AgroTech", level: 75 },
+    ],
   },
   {
     category: "Tecnología",
-    items: ["Python", "IA/ML", "Automatización", "Trading Algorítmico", "Web3"],
+    icon: "💻",
+    items: [
+      { name: "Python", level: 85 },
+      { name: "IA/ML", level: 75 },
+      { name: "Automatización", level: 80 },
+      { name: "Trading Algorítmico", level: 70 },
+      { name: "Web3", level: 65 },
+    ],
   },
   {
     category: "Creativo",
-    items: ["Composición Musical", "Guitarra", "Voz", "Escritura Creativa", "Producción"],
+    icon: "🎨",
+    items: [
+      { name: "Composición Musical", level: 90 },
+      { name: "Guitarra", level: 85 },
+      { name: "Voz", level: 80 },
+      { name: "Escritura Creativa", level: 85 },
+      { name: "Producción", level: 70 },
+    ],
   },
 ];
 
 const MUSIC_LINKS = [
-  { name: "Spotify", url: "#" },
-  { name: "YouTube", url: "#" },
-  { name: "Instagram", url: "#" },
-  { name: "SoundCloud", url: "#" },
+  { name: "Spotify", url: "#", icon: "♫" },
+  { name: "YouTube", url: "#", icon: "▶" },
+  { name: "Instagram", url: "#", icon: "📷" },
+  { name: "SoundCloud", url: "#", icon: "☁" },
 ];
 
 /* ─── Components ─── */
@@ -112,6 +146,7 @@ function GridBackground() {
     <div className="fixed inset-0 pointer-events-none z-0">
       <div className="absolute inset-0 dots-bg opacity-30" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-violet-600/5 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-purple-600/3 rounded-full blur-[100px]" />
     </div>
   );
 }
@@ -139,7 +174,7 @@ function Navbar() {
               className="hover:text-neutral-200 transition-colors relative group"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-violet-400 transition-all group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-[1.5px] bg-violet-400 transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
@@ -147,9 +182,12 @@ function Navbar() {
           href="https://github.com/fcamposgrillon-arch"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-neutral-500 hover:text-neutral-200 transition-colors text-sm"
+          className="text-neutral-500 hover:text-neutral-200 transition-colors text-sm flex items-center gap-1"
         >
-          GitHub ↗
+          GitHub
+          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
         </a>
       </div>
     </motion.nav>
@@ -176,11 +214,11 @@ function Hero() {
         >
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neutral-800 bg-neutral-900/50 text-xs text-neutral-400">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Asunción, Paraguay
+            📍 Asunción, Paraguay
           </span>
         </motion.div>
 
-        <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-8">
+        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] mb-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -203,10 +241,10 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.7 }}
           className="max-w-lg"
         >
-          <p className="text-lg md:text-xl text-neutral-400 leading-relaxed mb-2 font-light">
-            <Typewriter text="Abogado · Administrador Agrario · Músico" />
+          <p className="text-lg md:text-xl text-neutral-400 leading-relaxed mb-2 font-light h-8">
+            <Typewriter texts={TYPEWRITER_TEXTS} />
           </p>
-          <p className="text-sm text-neutral-600 leading-relaxed mt-4">
+          <p className="text-sm text-neutral-600 leading-relaxed mt-4 max-w-md">
             Explorando la intersección entre el derecho, la tecnología y la
             agricultura. Creando en la intersección de lo legal, lo rural y lo
             digital.
@@ -219,21 +257,25 @@ function Hero() {
           transition={{ delay: 1.5, duration: 0.5 }}
           className="mt-12 flex gap-4"
         >
-          <a
-            href="#projects"
-            className="group px-6 py-3 bg-violet-600 hover:bg-violet-500 rounded-lg text-sm font-medium transition-all hover:shadow-lg hover:shadow-violet-600/20"
-          >
-            Ver proyectos
-            <span className="inline-block ml-1 transition-transform group-hover:translate-x-0.5">
-              →
-            </span>
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-3 border border-neutral-700 hover:border-neutral-500 rounded-lg text-sm font-medium transition-colors text-neutral-300"
-          >
-            Contacto
-          </a>
+          <MagneticButton>
+            <a
+              href="#projects"
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-violet-600 hover:bg-violet-500 rounded-lg text-sm font-medium transition-all hover:shadow-lg hover:shadow-violet-600/20"
+            >
+              Ver proyectos
+              <span className="inline-block transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
+            </a>
+          </MagneticButton>
+          <MagneticButton>
+            <a
+              href="#contact"
+              className="inline-flex items-center px-6 py-3 border border-neutral-700 hover:border-neutral-500 rounded-lg text-sm font-medium transition-colors text-neutral-300"
+            >
+              Contacto
+            </a>
+          </MagneticButton>
         </motion.div>
 
         {/* Scroll indicator */}
@@ -258,7 +300,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="py-24 px-6 relative">
+    <section id="about" className="py-32 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-violet-400 mb-4 block">
@@ -289,8 +331,8 @@ function About() {
                 Fuera del ámbito académico, soy vocalista y guitarrista de{" "}
                 <strong className="text-violet-400">FRXN</strong>, un proyecto de rock alternativo
                 con influencias post-punk. También escribo ficción — actualmente trabajo en{" "}
-                <strong className="text-neutral-200">"Pieces of Me"</strong> y su precuela{" "}
-                <strong className="text-neutral-200">"El Bosque"</strong>.
+                <strong className="text-neutral-200">&quot;Pieces of Me&quot;</strong> y su precuela{" "}
+                <strong className="text-neutral-200">&quot;El Bosque&quot;</strong>.
               </p>
               <p>
                 Me interesan las criptomonedas, la automatización con IA, y las herramientas que
@@ -302,11 +344,11 @@ function About() {
           <FadeIn delay={0.3} className="md:col-span-2">
             <div className="space-y-6">
               {/* Quick facts */}
-              <div className="p-5 rounded-xl border border-neutral-800/60 bg-neutral-900/30">
-                <h3 className="text-xs font-medium tracking-widest uppercase text-neutral-500 mb-4">
+              <div className="p-6 rounded-xl border border-neutral-800/60 bg-neutral-900/30">
+                <h3 className="text-xs font-medium tracking-widest uppercase text-neutral-500 mb-5">
                   Datos rápidos
                 </h3>
-                <ul className="space-y-3 text-sm">
+                <ul className="space-y-3.5 text-sm">
                   {[
                     ["📍", "Asunción, Barrio Mburucuyá"],
                     ["🎓", "Derecho (último año) — UNA"],
@@ -316,7 +358,7 @@ function About() {
                     ["₿", "Crypto trader — Binance"],
                   ].map(([icon, text]) => (
                     <li key={text} className="flex items-center gap-3 text-neutral-300">
-                      <span className="text-base">{icon}</span>
+                      <span className="text-base w-6 text-center">{icon}</span>
                       {text}
                     </li>
                   ))}
@@ -324,8 +366,8 @@ function About() {
               </div>
 
               {/* Interests */}
-              <div className="p-5 rounded-xl border border-neutral-800/60 bg-neutral-900/30">
-                <h3 className="text-xs font-medium tracking-widest uppercase text-neutral-500 mb-4">
+              <div className="p-6 rounded-xl border border-neutral-800/60 bg-neutral-900/30">
+                <h3 className="text-xs font-medium tracking-widest uppercase text-neutral-500 mb-5">
                   Intereses
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -361,22 +403,24 @@ function About() {
 
 function Journey() {
   return (
-    <section id="journey" className="py-24 px-6 relative">
+    <section id="journey" className="py-32 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-violet-400 mb-4 block">
             Trayectoria
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-20">
             Dónde estoy y hacia dónde voy
           </h2>
         </FadeIn>
 
         <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-neutral-800 to-transparent" />
+          {/* Timeline line with gradient */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px">
+            <div className="w-full h-full bg-gradient-to-b from-violet-400/40 via-neutral-800 to-purple-400/20" />
+          </div>
 
-          <StaggerContainer className="space-y-12">
+          <StaggerContainer className="space-y-16">
             {JOURNEY.map((item, i) => (
               <StaggerItem key={i}>
                 <div
@@ -384,8 +428,12 @@ function Journey() {
                     i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
-                  {/* Dot */}
-                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-neutral-900 border-2 border-violet-400 z-10" />
+                  {/* Glowing dot */}
+                  <div className="absolute left-8 md:left-1/2 -translate-x-1/2 z-10">
+                    <div className="w-4 h-4 rounded-full bg-neutral-900 border-2 border-violet-400 relative">
+                      <div className="absolute inset-0 rounded-full bg-violet-400/30 animate-ping" />
+                    </div>
+                  </div>
 
                   {/* Content */}
                   <div className={`ml-16 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"}`}>
@@ -409,7 +457,7 @@ function Journey() {
 
 function Projects() {
   return (
-    <section id="projects" className="py-24 px-6 relative">
+    <section id="projects" className="py-32 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-violet-400 mb-4 block">
@@ -459,7 +507,7 @@ function Projects() {
 
 function Music() {
   return (
-    <section id="music" className="py-24 px-6 relative">
+    <section id="music" className="py-32 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-violet-400 mb-4 block">
@@ -471,6 +519,7 @@ function Music() {
           <div className="p-8 md:p-12 rounded-2xl border border-neutral-800/60 bg-gradient-to-br from-neutral-900/80 to-neutral-950 relative overflow-hidden">
             {/* Background glow */}
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-violet-600/10 rounded-full blur-[80px]" />
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-purple-600/5 rounded-full blur-[60px]" />
 
             <div className="relative z-10 flex flex-col md:flex-row items-start gap-8">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center shrink-0 shadow-lg shadow-violet-600/20">
@@ -499,8 +548,9 @@ function Music() {
                     <a
                       key={link.name}
                       href={link.url}
-                      className="px-4 py-2 text-sm rounded-lg bg-neutral-800/80 hover:bg-neutral-700/80 border border-neutral-700/50 transition-all hover:border-violet-600/30 text-neutral-300"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm rounded-lg bg-neutral-800/80 hover:bg-neutral-700/80 border border-neutral-700/50 transition-all hover:border-violet-600/30 text-neutral-300"
                     >
+                      <span className="text-violet-400">{link.icon}</span>
                       {link.name}
                     </a>
                   ))}
@@ -516,13 +566,13 @@ function Music() {
 
 function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 relative">
+    <section id="skills" className="py-32 px-6 relative">
       <div className="max-w-6xl mx-auto">
         <FadeIn>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-violet-400 mb-4 block">
             Skills
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-20">
             Áreas de conocimiento
           </h2>
         </FadeIn>
@@ -531,17 +581,31 @@ function Skills() {
           {SKILLS.map((group) => (
             <StaggerItem key={group.category}>
               <HoverCard className="p-6 rounded-xl border border-neutral-800/60 bg-neutral-900/30 h-full">
-                <h3 className="text-sm font-bold text-violet-400 tracking-wide uppercase mb-4">
-                  {group.category}
-                </h3>
-                <ul className="space-y-2.5">
-                  {group.items.map((skill) => (
-                    <li
-                      key={skill}
-                      className="flex items-center gap-2 text-sm text-neutral-400"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-neutral-600" />
-                      {skill}
+                <div className="flex items-center gap-2 mb-5">
+                  <span className="text-lg">{group.icon}</span>
+                  <h3 className="text-sm font-bold text-violet-400 tracking-wide uppercase">
+                    {group.category}
+                  </h3>
+                </div>
+                <ul className="space-y-4">
+                  {group.items.map((skill, idx) => (
+                    <li key={skill.name}>
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-sm text-neutral-400">{skill.name}</span>
+                      </div>
+                      <div className="w-full h-1 bg-neutral-800/60 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: `${skill.level}%` }}
+                          viewport={{ once: true }}
+                          transition={{
+                            duration: 1,
+                            delay: idx * 0.1,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className="h-full bg-gradient-to-r from-violet-500 to-purple-400 rounded-full"
+                        />
+                      </div>
                     </li>
                   ))}
                 </ul>
@@ -556,37 +620,39 @@ function Skills() {
 
 function Contact() {
   return (
-    <section id="contact" className="py-24 px-6 relative">
+    <section id="contact" className="py-32 px-6 relative">
       <div className="max-w-6xl mx-auto text-center">
         <FadeIn>
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-violet-400 mb-4 block">
             Contacto
           </span>
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-6">
             ¿Trabajamos juntos?
           </h2>
           <p className="text-neutral-500 max-w-md mx-auto mb-10 leading-relaxed">
             Abierto a colaboraciones en derecho, agronomía, tecnología, música y escritura.
           </p>
-          <a
-            href="mailto:fcamposgrillon@gmail.com"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 rounded-xl text-sm font-semibold transition-all hover:shadow-lg hover:shadow-violet-600/25 hover:-translate-y-0.5"
-          >
-            fcamposgrillon@gmail.com
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <MagneticButton className="inline-block">
+            <a
+              href="mailto:fcamposgrillon@gmail.com"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-violet-600 hover:bg-violet-500 rounded-xl text-sm font-semibold transition-all hover:shadow-lg hover:shadow-violet-600/25 hover:-translate-y-0.5"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
-          </a>
+              fcamposgrillon@gmail.com
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M14 5l7 7m0 0l-7 7m7-7H3"
+                />
+              </svg>
+            </a>
+          </MagneticButton>
 
           <div className="mt-12 flex justify-center gap-8">
             {[
