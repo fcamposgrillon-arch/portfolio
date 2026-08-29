@@ -52,7 +52,9 @@ const TRAY_TOOLTIP = 'WIDGET-TITLE';
 
 Also replace `WIDGET-SLUG` / `WIDGET-DESCRIPTION` in `package.json`. If the
 widget has no expand/collapse toggle, you can leave the `resize` IPC
-handler in `main.js` unused — it's harmless — rather than stripping it out.
+handler in `main.js` unused — it's harmless — rather than stripping it out;
+just set `HEIGHT_EXPANDED = HEIGHT_COMPACT` so the unused constant can't
+drift out of sync with the window's actual (single) size.
 
 ## 3. Write `index.html`
 
