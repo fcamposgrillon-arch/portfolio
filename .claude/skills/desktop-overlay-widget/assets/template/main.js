@@ -14,6 +14,20 @@ const TRAY_TOOLTIP = 'WIDGET-TITLE';
 let win = null;
 let tray = null;
 
+// Without this, every `npm start` while an instance is already running
+// spawns a second, independent window+tray instead of reusing the first —
+// the old one doesn't close itself just because a new one launched, and
+// it keeps showing whatever it loaded at its own startup even after you
+// edit index.html on disk. Second launch just wakes up the first instead.
+const gotLock = app.requestSingleInstanceLock();
+if (!gotLock) {
+  app.quit();
+} else {
+  app.on('second-instance', () => {
+    if (win) { win.show(); win.focus(); }
+  });
+}
+
 function makeTrayIcon() {
   const size = 32;
   const buf = Buffer.alloc(size * size * 4);
