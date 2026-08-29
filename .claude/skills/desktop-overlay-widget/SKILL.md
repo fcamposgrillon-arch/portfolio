@@ -83,6 +83,24 @@ two Electron-specific conventions:
   `window.overlayAPI.hide()`, `window.overlayAPI.quit()` — these are
   exposed by `preload.js` and go through `ipcMain.handle` in `main.js`.
 
+**Wire the window's close control to `quit()`, not `hide()`, unless
+you've actually confirmed a tray icon renders on this machine.**
+`hide()` is only recoverable through the tray icon, and on plenty of
+Linux setups no tray icon ever appears: vanilla GNOME needs a
+third-party extension (`AppIndicator and KStatusNotifierItem Support`)
+just to render one at all, and Electron's `globalShortcut` — the
+obvious-looking alternative — isn't a reliable fallback either, since
+native Wayland sessions restrict apps from grabbing global hotkeys for
+the same security reasons they restrict tray icons. Get this wrong and
+the user clicks "hide" once and the widget is just gone, with no click
+target anywhere to bring it back — they have to hunt down and kill the
+Electron process from a terminal to recover it, which is exactly what
+happened building the reference widgets for this skill. `quit()` has no
+such failure mode: relaunching with `npm start` is near-instant once
+`node_modules` exists, so there's nothing fragile to lose. Offer a real
+`hide()`-to-tray control only when the user has confirmed tray icons
+actually show up in their environment.
+
 Keep `html, body { background: transparent; }` and build the actual
 visible surface as a padded, rounded `<div class="card">` inside — the
 window itself is transparent, so anything outside that card is invisible
