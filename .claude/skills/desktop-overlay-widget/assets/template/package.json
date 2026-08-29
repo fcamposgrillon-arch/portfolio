@@ -1,0 +1,13 @@
+{
+  "name": "WIDGET-SLUG",
+  "version": "1.0.0",
+  "description": "WIDGET-DESCRIPTION",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}
