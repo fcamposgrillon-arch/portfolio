@@ -56,6 +56,19 @@ handler in `main.js` unused — it's harmless — rather than stripping it out;
 just set `HEIGHT_EXPANDED = HEIGHT_COMPACT` so the unused constant can't
 drift out of sync with the window's actual (single) size.
 
+**Give every widget a distinct `package.json` `"name"`.** The template's
+single-instance lock (`app.requestSingleInstanceLock()`) identifies "is
+another copy of this app already running?" by the app name, which Electron
+derives from that field — not from the folder path. Two widgets sharing a
+name (e.g. both left as a copy-pasted `"name": "my-widget"`) look like the
+same app to Electron: whichever one starts second detects the first as an
+existing instance and silently exits without opening a window or printing
+an error, which is confusing to debug because nothing looks broken. This
+happened once already, and cost a long debugging detour that a five-second
+uniqueness check would have skipped — always check every widget the user
+already has running has a different name before troubleshooting anything
+else about a widget that "won't open."
+
 ## 3. Write `index.html`
 
 This is the only file you write from scratch each time. It's a normal
