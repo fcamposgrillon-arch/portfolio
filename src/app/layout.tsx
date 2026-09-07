@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { MatrixNotes } from "@/components/MatrixNotes";
 
 export const metadata: Metadata = {
   title: "Francisco Campos Grillon",
@@ -28,6 +29,7 @@ export default function RootLayout({
       </head>
       <body>
         {children}
+        <MatrixNotes />
       </body>
     </html>
   );
