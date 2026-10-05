@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { FadeIn, HoverCard } from "@/components/Animations";
 
 /* ─── Data ─── */
@@ -52,6 +53,7 @@ const PROJECTS = [
     desc: "Sistema personal de seguimiento biometrico con variables como delta, intensidad, coherencia y observacion. Herramienta de gestion de bienestar personal.",
     tags: ["Salud", "Datos", "Automatizacion", "Python"],
     accent: "#8fa89e",
+    href: "/proyectos/biotetris",
   },
   {
     title: "Hermes Agent",
@@ -387,8 +389,8 @@ function Projects() {
         </FadeIn>
 
         <div className="grid md:grid-cols-2 gap-4">
-          {PROJECTS.map((project, i) => (
-            <FadeIn key={project.title} delay={i * 0.05}>
+          {PROJECTS.map((project, i) => {
+            const card = (
               <HoverCard>
                 <div
                   className="p-6 rounded-lg h-full"
@@ -410,8 +412,20 @@ function Projects() {
                   </div>
                 </div>
               </HoverCard>
-            </FadeIn>
-          ))}
+            );
+
+            return (
+              <FadeIn key={project.title} delay={i * 0.05}>
+                {project.href ? (
+                  <Link href={project.href} className="block">
+                    {card}
+                  </Link>
+                ) : (
+                  card
+                )}
+              </FadeIn>
+            );
+          })}
         </div>
       </div>
     </section>
