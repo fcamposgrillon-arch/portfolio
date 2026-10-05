@@ -75,7 +75,7 @@ export default function BioTetrisCaseStudy() {
           <p className="text-sm text-ink-ghost font-light mb-6">
             Case study de diseno y producto
           </p>
-          <div className="flex flex-wrap gap-1.5 mb-16">
+          <div className="flex flex-wrap gap-1.5 mb-12">
             {["Salud", "Datos", "Automatizacion", "Python", "UX"].map((tag) => (
               <span
                 key={tag}
@@ -86,6 +86,38 @@ export default function BioTetrisCaseStudy() {
               </span>
             ))}
           </div>
+        </FadeIn>
+
+        <FadeIn delay={0.08}>
+          <blockquote
+            className="pl-5 mb-16 max-w-2xl"
+            style={{ borderLeft: "2px solid var(--color-vera)" }}
+          >
+            <div className="space-y-3 text-sm text-ink-dim font-light leading-relaxed">
+              <p>
+                El péndulo marca la fuerza, la rueda la coordenada. Cuanto más
+                querés frenar al péndulo descontrolado, más fuerza toma.
+                Cuanto más lo ignorás, más avanza igual.
+              </p>
+              <p>
+                La vida se parece más al Tetris: velocidad, peso, piezas
+                cayendo, estrategia que nace mientras todo se desordena.
+              </p>
+              <p>
+                Un sistema realmente funcional no necesita mil reglas.
+                Necesita al baqueano interno, ese que sabe cuándo viene la
+                tormenta. No la evita. La lee.
+              </p>
+            </div>
+            <a
+              href="https://fcamposgrillon.substack.com/p/6b715264-3a40-47eb-8732-a5b3774afc7c"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block mt-4 text-xs text-ink-ghost hover:text-candle transition-colors"
+            >
+              -- El Paraiso Perdido, El Substack de Francisco, nov. 2025
+            </a>
+          </blockquote>
         </FadeIn>
 
         <Section title="Origen" delay={0.1}>
