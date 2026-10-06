@@ -133,6 +133,17 @@ export default function BioTetrisCaseStudy() {
             &ldquo;llevar un registro&rdquo;. Me di cuenta de esto recien
             despues de haber empezado a construirlo.
           </p>
+          <p>
+            Esto tampoco es samadhi, ni un &ldquo;quedar bien con
+            todos&rdquo; disfrazado de bienestar. No hay alma colectiva,
+            hermandad universal ni amor incondicional en la base de BioTetris
+            -- es bastante individualista, casi objetivista: el sistema
+            existe para entenderme y mejorarme a mi, no para disolverme en
+            nada mas grande. Hacia afuera, el approach tampoco se rige por
+            empatia o diplomacia, sino por una logica mas cercana a la teoria
+            de juegos -- un eje que todavia estoy desarrollando dentro del
+            sistema.
+          </p>
         </Section>
 
         <Section title="Modelo de datos" delay={0.15}>
