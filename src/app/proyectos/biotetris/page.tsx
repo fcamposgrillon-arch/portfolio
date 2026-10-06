@@ -206,7 +206,63 @@ export default function BioTetrisCaseStudy() {
           </p>
         </Section>
 
-        <FadeIn delay={0.35}>
+        <Section title="Lo que BioTetris no mide" delay={0.32}>
+          <p>
+            Modo reducido no alcanza. Sigue siendo una forma de medir, solo
+            que mas liviana -- y la critica real es otra: un sistema armado
+            enteramente sobre mejora continua no deja espacio para lo que se
+            hace por placer puro, sin fin. A veces ese gozo no es solo
+            necesario para la paz mental -- es mas efectivo para llegar a
+            ciertas cosas que la optimizacion directa.
+          </p>
+          <p>
+            La solucion no es una pantalla nueva dentro de la app. Es una
+            frontera: ciertas categorias de tiempo quedan permanentemente
+            fuera de la jurisdiccion de BioTetris. No se registran, ni
+            siquiera como actividad sin categorizar. El riesgo real no es que
+            falte una funcion -- es la tentacion de, en unos meses, querer
+            agregarle una.
+          </p>
+          <p>
+            Tiene nombre, y lo tenia desde antes de que hiciera falta: <span className="text-ink">El Paraiso Perdido</span>,
+            el mismo del epigrafe -- el instante donde el pendulo deja de
+            importar.
+          </p>
+          <div className="pt-2">
+            <p className="mb-3">Por ahora, el paraiso incluye:</p>
+            <div className="space-y-2">
+              {[
+                "Videojuegos",
+                "Tiempo familiar",
+                "Libros leidos solo por placer, y nada mas",
+                "Creacion musical sin rumbo",
+                "Probar algo nuevo por pura curiosidad",
+                "Reaccionar distinto a como reaccionaria, solo para ver que pasa",
+                "Mirar una tormenta y parar todo",
+              ].map((item) => (
+                <div key={item} className="flex items-baseline gap-2.5">
+                  <span
+                    className="w-1 h-1 rounded-full shrink-0"
+                    style={{ background: "var(--color-vera)" }}
+                  />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p className="pt-2">
+            La creacion musical es el caso mas interesante de la lista, porque
+            el limite no es por categoria, es por estado: componer sin rumbo
+            es paraiso; en el momento en que esa sesion se convierte en
+            &ldquo;esto es para el proximo tema&rdquo;, adquiere un objetivo
+            externo y sale hacia el territorio normal de BioTetris. Ese es el
+            test para cualquier actividad nueva que la lista no haya previsto:
+            ¿tiene esto, ahora mismo, un objetivo fuera de si misma? Si no, es
+            paraiso. Si lo adquiere despues, sale.
+          </p>
+        </Section>
+
+        <FadeIn delay={0.37}>
           <div
             className="p-5 rounded-lg mb-8"
             style={{ background: "var(--color-surface-mid)", border: "1px solid var(--border-subtle)" }}
